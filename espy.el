@@ -56,7 +56,7 @@ whitespace followed by a password in password file.")
 
 ;;;###autoload
 (defun espy ()
-  "Scans `espyy-password-file' and prompts user for password entry.
+  "Scans `espy-password-file' and prompts user for password entry.
 
 After user has selected a password entry it is copied to the kill ring."
   (interactive)

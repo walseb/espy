@@ -1,6 +1,8 @@
 * Espy - Emacs Simple Password Yielder
 To espy is to see something at a distance which is what this package is about. This package allows users to fetch a password from a file without visiting it.
 
+This package is kept deliberately short to allow for easy manual checks as to minimize the "hijacked account" attack vector and should ideally be stored offline, without automatic updates.
+
 #+html: <img src="screenshot2.png" alt="Espy prompt of same file"/>
 #+html: <img src="screenshot1.png" alt="Raw password file"/>
 
@@ -20,14 +22,12 @@ To espy is to see something at a distance which is what this package is about. T
 First select the directory of your password file by changing =espy-password-file= e.g.
 
 #+BEGIN_SRC emacs-lisp
-(setq espy-password-file "~/my-passwords.org.gpg")
+  (setq espy-password-file "~/my-passwords.org.gpg")
 #+END_SRC
 
 Then type =M-x espy= to select which password you want to copy to the killring.
 
 Keep in mind that the password will stay in the killring event after being pasted, to fix this you could bind =(pop kill-ring)= which yanks the latest entry in the killring and then removes it from the killring.
 
-This package is kept deliberately short to allow for easy manual checks as to minimize the "hijacked account" attack vector and should ideally be stored offline, without automatic updates.
-
 ** Configuration
-What format =M-x espy= expects can be modified by changing =espy-header-prefix= and =espy-password-prefix=. By default it expects org headings ("*") followed by a password (">>").
+The prefixes =M-x espy= uses do detect passwords and headings can be modified by changing =espy-header-prefix= and =espy-password-prefix=. By default it expects org headings ("*") followed by a password (">>").

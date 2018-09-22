@@ -1,8 +1,8 @@
 * Espy - Emacs Simple Password Yielder
 To espy is to see something at a distance which is what this package is about. This package allows users to fetch a password from a file without visiting it.
 
-#+html: <img src="screenshot1.png" alt="Raw password file"/>
 #+html: <img src="screenshot2.png" alt="Espy prompt of same file"/>
+#+html: <img src="screenshot1.png" alt="Raw password file"/>
 
 ** This solution compared to other password solutions (pass, keepass, etc)
 - Only dependent on GPG

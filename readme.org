@@ -1,10 +1,11 @@
 * Espy - Emacs Simple Password Yielder
-To espy is to see something at a distance which is what this package is about. This package allows users to fetch a password from a file without visiting it.
+To espy is to see something at a distance which is what this package is about. This package allows users to fetch a password or a username from a file without visiting it.
 
 This package is kept deliberately short to allow for easy manual checks as to minimize the "hijacked account" attack vector and should ideally be stored offline, without automatic updates.
 
-#+html: <img src="screenshot2.png" alt="Espy prompt of same file"/>
-#+html: <img src="screenshot1.png" alt="Raw password file"/>
+#+html: <img src="screenshot1.png" alt="Espy username prompt of same file"/>
+#+html: <img src="screenshot2.png" alt="Espy password prompt of same file"/>
+#+html: <img src="screenshot3.png" alt="Raw password file"/>
 
 ** This solution compared to other password solutions (pass, keepass, etc)
 - Only dependent on GPG
@@ -25,9 +26,9 @@ First select the directory of your password file by changing =espy-password-file
   (setq espy-password-file "~/my-passwords.org.gpg")
 #+END_SRC
 
-Then type =M-x espy= to select which password you want to copy to the killring.
+Then type =M-x espy-get-user= or =M-x espy-get-pass= to select which username or password you want to copy to the killring.
 
-Keep in mind that the password will stay in the killring event after being pasted, to fix this you could bind =(pop kill-ring)= which yanks the latest entry in the killring and then removes it from the killring.
+Keep in mind that the username or password will stay in the killring even after being pasted, to fix this you could bind =(pop kill-ring)= which yanks the latest entry in the killring and then removes it from the killring or setup a timer that removes the last entry in the killring.
 
 ** Configuration
-The prefixes =M-x espy= uses do detect passwords and headings can be modified by changing =espy-header-prefix= and =espy-password-prefix=. By default it expects org headings ("*") followed by a password (">>").
+The prefixes =M-x espy-user= and =M-x espy-pass= uses do detect usernames and passwords and headings can be modified by changing =espy-header-prefix= =espy-user-prefix= and =espy-pass-prefix=. By default it expects org headings ("*") followed by a username ("user: ") and a password ("pass: ").

@@ -54,6 +54,25 @@ whitespace followed by a password in password file.")
 (defvar espy-password-prefix ">>"
   "A string prefixing passwords.")
 
+(defun espy-get-password-headers ()
+  "Fetches all headers containing a password in a file."
+  (with-temp-buffer
+    (insert-file-contents espy-password-file)
+    (goto-char (point-min))
+    ;; Search for user selected header
+    (let* ((found-headers (list)))
+      (while
+	  (ignore-errors
+	    ;; Go to next header in case last header had more than 1 password
+	    (re-search-forward (concat "^" espy-header-prefix "+\s"))
+	    (re-search-forward (concat "^" espy-password-prefix))
+	    (re-search-backward (concat "^" espy-header-prefix "+\s"))
+	    ;; Search-backward puts the cursor at column position 0, fix this
+	    (re-search-forward "\s"))
+	;; Push header string to list
+	(push (buffer-substring-no-properties (point) (line-end-position)) found-headers))
+      found-headers)))
+
 ;;;###autoload
 (defun espy ()
   "Scans `espy-password-file' and prompts user for password entry.
@@ -63,24 +82,11 @@ After user has selected a password entry it is copied to the kill ring."
   (with-temp-buffer
     (insert-file-contents espy-password-file)
     (goto-char (point-min))
-    ;; Search for user selected header
+    ;; Go to selected heading
     (re-search-forward
      (concat espy-header-prefix " "
-	     (let* ((found-headers (list)))
-	       (while
-		   (ignore-errors
-		     ;; Go to next header in case last header had more than 1 password
-		     (re-search-forward (concat "^" espy-header-prefix "+\s"))
-		     (re-search-forward (concat "^" espy-password-prefix))
-		     (re-search-backward (concat "^" espy-header-prefix "+\s"))
-		     ;; Search-backward puts the cursor at column position 0, fix this
-		     (re-search-forward "\s"))
-		 ;; Push header string to list
-		 (push (buffer-substring-no-properties (point) (line-end-position)) found-headers))
-	       ;; Reset cursor position after operation
-	       (goto-char (point-min))
-	       (completing-read "Get password: " found-headers))))
-    ;; Find header password
+	     (completing-read "Get password: " (espy-get-password-headers))))
+    ;; Go to heading password
     (re-search-forward (concat "^" espy-password-prefix "\s"))
     (kill-new (buffer-substring-no-properties (point) (line-end-position)))))
 

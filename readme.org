@@ -3,9 +3,15 @@ To espy is to see something at a distance which is what this package is about. T
 
 This package is kept deliberately short to allow for easy manual checks as to minimize the "hijacked account" attack vector and should ideally be stored offline, without automatic updates.
 
-#+html: <img src="screenshot1.png" alt="Espy username prompt of same file"/>
+#+html: <div>
+#+html: <img src="screenshot1.png" alt="Espy username prompt of same file"/> 
+#+html: <div>Username prompt</div></div>
+#+html: <div>
 #+html: <img src="screenshot2.png" alt="Espy password prompt of same file"/>
+#+html: <div>Password prompt</div></div>
+#+html: <div>
 #+html: <img src="screenshot3.png" alt="Raw password file"/>
+#+html: <div>Raw password file</div></div>
 
 ** This solution compared to other password solutions (pass, keepass, etc)
 - Only dependent on GPG

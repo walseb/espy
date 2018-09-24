@@ -34,7 +34,7 @@ First select the directory of your password file by changing =espy-password-file
 
 Then type =M-x espy-get-user= or =M-x espy-get-pass= to select which username or password you want to copy to the killring.
 
-Keep in mind that the username or password will stay in the killring even after being pasted, to fix this you could bind =(pop kill-ring)= which yanks the latest entry in the killring and then removes it from the killring or setup a timer that removes the last entry in the killring.
+Keep in mind that the username or password will stay in the killring even after being pasted, to fix this you could bind =(progn (pop kill-ring) (message "Top killring entry cleared"))= removes top entry in the killring or setup a timer that removes the last entry in the killring.
 
 ** Configuration
 The prefixes =M-x espy-user= and =M-x espy-pass= uses do detect usernames and passwords and headings can be modified by changing =espy-header-prefix= =espy-user-prefix= and =espy-pass-prefix=. By default it expects org headings ("*") followed by a username ("user: ") and a password ("pass: ").

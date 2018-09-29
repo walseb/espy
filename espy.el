@@ -43,26 +43,45 @@
 
 ;;; Code:
 
-(defvar espy-clipboard-command nil
-  "If non-nil, copy passwords and usernames using the string inserted as base.
+(defgroup espy nil
+  "Emacs Simple Password Yielder"
+  :group 'tools
+  :link '(url-link "https://github.com/walseb/espy"))
 
-Espy runs the command as a standard command line command in this order:
-`espy-clipboard-command' + password-or-user-string")
+(defcustom espy-clipboard-command nil
+  "If non-nil,  run `espy-clipboard-command' on espy-get results.
 
-(defvar espy-password-file "~/password.org.gpg"
-  "The file to pull passwords from.")
+If nil, copy espy-get results to killring.
+Espy runs the command as a standard shell command in this order:
+`espy-clipboard-command' + password-or-user-string"
+  :group 'espy)
 
-(defvar espy-header-prefix "*"
+(defcustom espy-password-file "~/password.org.gpg"
+  "The file to pull passwords from."
+  :group 'espy)
+
+(defcustom espy-header-prefix "*"
   "A single letter string prefixing password headings.
 
-Expected to be repeated 1 or more times before a
-whitespace followed by a password in password file.")
+Expected to be in beginning of line and repeated 1 or more times before a
+whitespace followed by a password or username in the password file."
+  :group 'espy
+  :type 'regexp)
 
-(defvar espy-user-prefix "user:"
-  "A string prefixing passwords.")
+(defcustom espy-user-prefix "user:"
+  "A string prefixing passwords.
 
-(defvar espy-pass-prefix "pass:"
-  "A string prefixing passwords.")
+Expected to be in beginning of line"
+  :group 'espy
+  :type 'regexp)
+
+(defcustom espy-pass-prefix "pass:"
+  "A string prefixing passwords.
+
+Expected to be in beginning of line"
+  :group 'espy
+  :type 'regexp)
+
 
 (defun espy-get-headers-with-content (content-prefix)
   "Fetches all headers containing a password in a file.

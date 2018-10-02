@@ -1,7 +1,7 @@
 * Espy - Emacs Simple Password Yielder
 To espy is to see something at a distance which is what this package is about. This package allows users to fetch a password or a username from a file without visiting it.
 
-This package is kept deliberately short to allow for easy manual checks as to minimize the "hijacked account" attack vector and should ideally be stored offline, without automatic updates.
+This package is kept deliberately short to allow for easy manual checks as to minimize the "hijacked account" attack vector and should ideally be stored without automatic updates.
 
 #+html: <div>
 #+html: <div><i>Username prompt</i></div></div>
@@ -14,11 +14,13 @@ This package is kept deliberately short to allow for easy manual checks as to mi
 #+html: <img src="screenshot3.png" alt="Raw password file"/>
 
 ** This solution compared to other password solutions (pass, keepass, etc)
-- Only dependent on GPG
-- Password file can be opened and edited using only GPG and a text editor
+- No dependencies (if you want to encrypt your password file you need a encrypter. GPG works best for emacs because of epa)
+- Supports use of any or no file encrypters
+- A decrypted password file can be opened and edited using any text editor (difficult to do in keepass)
 - Easily change format of password file to fit your favorite major mode.
-- Org mode
-- Support for both symmetric encryption (not supported by pass) and asymmetric encryption (not officially supported by keepass)
+- Org mode support (not possible in keepass)
+- Support for both symmetric encryption (not supported by pass) and asymmetric encryption (not officially supported by keepass) when encrypting with GPG
+
 
 ** Install
 #+BEGIN_SRC emacs-lisp

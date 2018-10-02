@@ -1,3 +1,4 @@
+[[https://melpa.org/#/espy][file:https://melpa.org/packages/espy-badge.svg]]
 * Espy - Emacs Simple Password Yielder
 To espy is to see something at a distance which is what this package is about. This package allows users to fetch a password or a username from a file without visiting it.
 

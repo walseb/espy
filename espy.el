@@ -82,6 +82,13 @@ Expected to be in beginning of line"
   :group 'espy
   :type 'regexp)
 
+(defcustom espy-second-pass-prefix "pass2:"
+  "A string prefixing passwords.
+
+Expected to be in beginning of line"
+  :group 'espy
+  :type 'regexp)
+
 
 (defun espy-get-headers-with-content (content-prefix)
   "Fetches all headers containing a password in a file.
@@ -137,6 +144,14 @@ or a command is run on it as defined by `espy-clipboard-command'."
   (if espy-clipboard-command
       (shell-command (concat espy-clipboard-command (espy-get-content "Get password: " espy-pass-prefix)))
     (kill-new (espy-get-content "Get password: " espy-pass-prefix))))
+
+;;;###autoload
+(defun espy-get-second-pass ()
+  "Prompts user for second password to copy to killring."
+  (interactive)
+  (if espy-clipboard-command
+      (shell-command (concat espy-clipboard-command (espy-get-content "Get second password: " espy-second-pass-prefix)))
+    (kill-new (espy-get-content "Get second password: " espy-second-pass-prefix))))
 
 (provide 'espy)
 

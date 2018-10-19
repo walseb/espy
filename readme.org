@@ -21,7 +21,7 @@ This package is kept deliberately short to allow for easy manual checks as to mi
 - Easily change format of password file to fit your favorite major mode.
 - Org mode support (not possible in keepass)
 - Support for both symmetric encryption (not supported by pass) and asymmetric encryption (not officially supported by keepass) when encrypting with GPG
-
+- When accessing password file in emacs all emacs related security problems are present (e.g every package has full access to everything in emacs), same as with every other emacs password manager
 
 ** Install
 #+BEGIN_SRC emacs-lisp

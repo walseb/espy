@@ -40,4 +40,4 @@ Then type =M-x espy-get-user= or =M-x espy-get-pass= to select which username or
 Keep in mind that the username or password will stay in the killring even after being pasted, to fix this you could bind =(progn (pop kill-ring) (message "Top killring entry cleared"))= which removes the top entry in the killring or setup a timer that removes the last entry in the killring.
 
 ** Configuration
-The prefixes =M-x espy-user= and =M-x espy-pass= uses do detect usernames and passwords and headings can be modified by changing =espy-header-prefix= =espy-user-prefix= and =espy-pass-prefix=. By default it expects org headings ("*") followed by a username ("user: ") and a password ("pass: ").
+The prefixes =M-x espy-user= and =M-x espy-pass= uses to detect usernames, passwords and headings can be modified by changing =espy-header-prefix= =espy-user-prefix= and =espy-pass-prefix=. By default it expects org headings ("*") optionally followed by a username ("user: ") or a password ("pass: ").

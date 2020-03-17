@@ -107,7 +107,7 @@ CONTENT-PREFIX is the prefix expect before content."
 (defun espy-get-content (prompt-string content-prefix)
   "Scans `espy-password-file' and prompts user for all headers with content.
 
-Content is defined by text beginning with CONTENT-PREFIX.
+Content is defined by text beginning with CONTENT-PREFIX and ending in the heading name.
 `PROMPT-STRING' is displayed among prompt.
 After the user has selected a entry it is copied to the kill ring
 or a command is run on it as defined by `espy-clipboard-command'."
@@ -117,7 +117,8 @@ or a command is run on it as defined by `espy-clipboard-command'."
     ;; Go to selected heading
     (re-search-forward
      (concat espy-header-prefix " "
-	     (completing-read prompt-string (espy-get-headers-with-content content-prefix))))
+	     (completing-read prompt-string (espy-get-headers-with-content content-prefix))
+	     "$"))
     ;; Go to heading password
     (re-search-forward (concat "^" content-prefix "\s"))
     (buffer-substring-no-properties (point) (line-end-position))))

@@ -104,20 +104,22 @@ CONTENT-PREFIX is the prefix expect before content."
 	(push (buffer-substring-no-properties (point) (line-end-position)) found-headers))
       found-headers)))
 
-(defun espy-get-content (prompt-string content-prefix)
+(defun espy-get-content (prompt-string content-prefix &optional query)
   "Scans `espy-password-file' and prompts user for all headers with content.
 
 Content is defined by text beginning with CONTENT-PREFIX and ending in the heading name.
 `PROMPT-STRING' is displayed among prompt.
 After the user has selected a entry it is copied to the kill ring
-or a command is run on it as defined by `espy-clipboard-command'."
+or a command is run on it as defined by `espy-clipboard-command'.
+
+If QUERY is non-nil, use it to search for a content programmatically."
   (with-temp-buffer
     (insert-file-contents espy-password-file)
     (goto-char (point-min))
     ;; Go to selected heading
     (re-search-forward
      (concat espy-header-prefix " "
-	     (completing-read prompt-string (espy-get-headers-with-content content-prefix))
+	     (or query (completing-read prompt-string (espy-get-headers-with-content content-prefix)))
 	     "$"))
     ;; Go to heading password
     (re-search-forward (concat "^" content-prefix "\s"))
